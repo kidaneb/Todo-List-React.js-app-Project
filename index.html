@@ -14,14 +14,20 @@
       </div>
       <div class="input-forms">
         <form class="form">
-          <input type="text" placeholder="Enter new todo" class="todo-input">
+          <input type="text" placeholder="Enter new todo" class="todo-input" />
           <div>
             <button type="button" class="todo-submit-btn">Add Todo</button>
           </div>
         </form>
       </div>
       <div class="todos-container">
-        <div class="filter-input-container"></div>
+        <div class="filter-input-container">
+          <input type="text" placeholder="search todos" class="filter-input" />
+          <div class="filter-child">
+            <span class="filter-error">error just happen todos not found</span>
+            <input type="checkbox">
+          </div>
+        </div>
 
         <div class="todos-list">
           <div class="todo">
