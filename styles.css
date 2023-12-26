@@ -8,15 +8,20 @@ body {
 .container {
   height: 100vh;
   width: 60vw;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+.container:hover{
+  box-shadow: 0 0 5px 0 lightgray;
+}
 .toggle-btn {
   height: 5%;
   width: 13%;
-  background-color: ;
+  background-color:black ;
+  color: white;
+  border-radius: 2em;
   font-size: 1rem;
   align-self: flex-end;
   margin: 3px;
@@ -80,11 +85,15 @@ body {
   height: 65%;
   width: 90%;
   /* background-color: cyan; */
-  border: 1px solid red;
+  /* border: 1px solid red; */
   margin: 3px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0.5em;
+}
+.todos-container:hover{
+  box-shadow: 0 0 5px 0 lightgray;
 }
 .filter-input-container {
   height: 15%;
@@ -101,38 +110,44 @@ body {
   outline: none;
   font-size: 1rem;
   padding: 0.5em;
-  width: 90%;
+  width: 80%;
   border: 1px solid hsl(0, 8%, 51%);
-  border-radius: 0.3em;
+  border-radius: 2em;
 }
 .filter-input:focus {
   border: 1px solid hsl(0, 8%, 31%);
   box-shadow: 0 0 5px 0 hsl(0, 8%, 31%);
 }
 .filter-child {
+  width: 90%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+}
+.check-filter{
+  margin-right: 3em;
 }
 .filter-error {
   align-self: start;
   justify-self: start;
-  margin-left: 1.6em;
+  margin-left: 3em;
   font-size: 1rem;
   color: red;
 }
 .todos-list {
   height: 85%;
   width: 98%;
-  background-color: violet;
-  border: 1px solid blue;
+  /* background-color:hsl(0, 5%, 88%); */
+  /* border: 1px solid blue; */
   margin: 1%;
   overflow-y: auto;
 }
+
 .todo {
   height: 20%;
   width: 98%;
-  background-color: green;
-  border: 1px solid blue;
+  /* background-color: green; */
+  /* border: 1px solid blue; */
   margin: 1%;
   display: flex;
   justify-content: space-around;
@@ -141,7 +156,8 @@ body {
   height: 98%;
   width: 70%;
   border: 1px solid white;
-  background-color: red;
+  border-radius: 0.3em;
+  background-color: hsl(0, 12%, 90%);
   font-size: 1.5rem;
   display: flex;
   overflow: y;
@@ -150,8 +166,8 @@ body {
 .btn-container {
   height: 98%;
   width: 30%;
-  background-color: white;
-  border: 1px solid red;
+  /* background-color: white; */
+  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -170,17 +186,29 @@ body {
   align-items: center;
 }
 .btn-complete {
-  background: hsl(0, 6%, 30%);
-  color: cyan;
-  border: 1px solid hsl(0, 6%, 10%);
+  background: hsl(210, 100%, 50%);
+  color: white;
+  border: 1px solid hsl(210, 100%, 30%);
+}
+.btn-complete:hover, .btn-complete:focus{
+  background:hsl(210, 100%, 40%);
+  box-shadow: 0 0 5px 0 hsl(210, 100%, 40%);
 }
 .btn-edit {
-  background: hsl(208, 52%, 60%);
-  color: yellow;
-  border: 1px solid hsl(208, 52%, 40%);
+  background:hsl(60, 100%, 60%);
+  color:hsl(0, 79%, 45%);
+  border: 1px solid hsl(60, 100%, 40%);
+}
+.btn-edit:hover, .btn-edit:focus{
+  background:hsl(60, 100%, 45%) ;
+  box-shadow: 0 0 5px 0 hsl(60, 100%, 40%);
 }
 .btn-delete {
-  background: hsl(173, 52%, 60%);
-  color: red;
-  border: 1px solid hsl(173, 52%, 40%);
+  background: hsl(0, 79%, 65%);
+  color: rgb(255, 255, 255);
+  border: 1px solid hsl(0, 79%, 35%);
+}
+.btn-delete:hover, .btn-delete:focus{
+  background: hsl(0, 79%, 45%);
+  box-shadow: 0 0 5px 0 hsl(0, 79%, 65%);
 }
