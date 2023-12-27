@@ -105,10 +105,10 @@ body {
   background-color: green;
   border: 1px solid blue;
   margin: 1%;
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content:space-evenly;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 .filter-input {
   outline: none;
@@ -133,11 +133,8 @@ body {
   justify-content: space-between;
 }
 .check-filter {
-  
 }
 .filter-error {
-  align-self: start;
-  justify-self: start;
   font-size: 1rem;
   color: red;
 }
@@ -228,55 +225,33 @@ body {
     width: 100vw;
   }
   .todo-submit-btn {
-    
     padding: 0.5em;
-    
     font-size: 1rem;
-  }  
-  
-  .filter-input {   
+  }
+
+  .filter-input {
     height: 55%;
   }
-  
+
   .filter-child {
     height: 30%;
     width: 80%;
-    /* background-color: white; */
-    
-    justify-content: space-between;
   }
-  .check-filter {
-    
-    justify-content: center;
-  }
+
   .filter-error {
-    display: flex;
     font-size: 0.7rem;
-    color: red;
   }
   .todo {
     height: 35%;
-    width: 98%;
-    /* background-color: green; */
-    border: 1px solid blue;
-    margin: 1%;
-    display: flex;
-    justify-content: space-around;
   }
+
   .btn-container {
-    height: 98%;
-    width: 30%;
-    /* background-color: white; */
-    border: 1px solid red;
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
   }
+
   .btn {
     height: 30%;
     width: 70%;
-    
   }
 }
 /* Tablet styles */
@@ -285,18 +260,10 @@ body {
     width: 100vw;
   }
   .btn-container {
-    height: 98%;
-    width: 30%;
-    /* background-color: white; */
-    border: 1px solid red;
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
   }
   .btn {
     height: 30%;
     width: 70%;
-    
   }
 }
