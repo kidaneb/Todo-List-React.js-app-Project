@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
 }
-body {
+.body {
   display: flex;
   justify-content: center;
 }
@@ -27,6 +27,8 @@ body {
   align-self: flex-end;
   margin: 3px;
 }
+/* THE TITLE PART */
+
 .title {
   height: 10%;
   width: 90%;
@@ -43,6 +45,9 @@ body {
   font-weight: bolder;
   font-size: 2.3rem;
 }
+
+/* INPUT TODO FORM */
+
 .input-forms {
   height: 20%;
   width: 90%;
@@ -79,12 +84,13 @@ body {
   border-radius: 0.3em;
   font-size: 1.5rem;
 }
-
 .todo-submit-btn:hover,
 .todo-submit-btn:focus {
   background-color: hsl(216, 100%, 30%);
   box-shadow: 0 0 5px 0 hsl(216, 100%, 30%);
 }
+
+/* THE TODOS CONTAINER */
 
 .todos-container {
   height: 65%;
@@ -100,6 +106,9 @@ body {
 .todos-container:hover {
   box-shadow: 0 0 5px 0 lightgray;
 }
+
+/* THE FILTER TODOS SECTION */
+
 .filter-input-container {
   height: 15%;
   width: 98%;
@@ -139,6 +148,9 @@ body {
   font-size: 1rem;
   color: red;
 }
+
+/* TODO-LIST SECTION */
+
 .todos-list {
   height: 85%;
   width: 100%;
@@ -158,12 +170,13 @@ body {
   justify-content: space-around;
 }
 .todo:hover{
-  box-shadow: 0 0 5px 0 hsl(0, 0%, 73%);
+  
+  box-shadow: 0 0 5px 0 hsl(0, 0%, 50%);
 }
 .text-container {
   height: 98%;
   width: 70%;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   border-radius: 0.3em;
   background-color: hsl(0, 12%, 90%);
   font-size: 1.5rem;
@@ -171,6 +184,12 @@ body {
   overflow: y;
   overflow-x: auto;
 }
+.text-container:hover{
+  border: 1px solid black;
+}
+
+/* TODO-LIST BUTTONS */
+
 .btn-container {
   height: 98%;
   width: 30%;
@@ -223,6 +242,9 @@ body {
   background: hsl(38, 33%, 28%);
   box-shadow: 0 0 5px 0 hsl(38, 33%, 28%);
 }
+
+/* RESPONSIVE TO MOBILE AND TABLET DEVICES */
+
 /* Mobile styles */
 @media (max-width: 768px) {
   .container {
