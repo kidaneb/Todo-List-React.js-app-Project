@@ -194,8 +194,8 @@ body {
   align-items: center;
 }
 .btn-complete {
-  background: hsl(211, 50%, 45%);
-  color: white;
+  background: #3971ac;
+  color: hsl(39, 18%, 85%);
   border: 1px solid hsl(211, 50%, 25%);
 }
 .btn-complete:hover,
@@ -205,7 +205,7 @@ body {
 }
 .btn-edit {
   background: hsl(38, 100%, 50%);
-  color: hsl(0, 79%, 45%);
+  color: hsl(36, 11%, 18%);
   border: 1px solid hsl(38, 100%, 30%);
 }
 .btn-edit:hover,
