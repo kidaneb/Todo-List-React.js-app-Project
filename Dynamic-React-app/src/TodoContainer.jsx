@@ -1,7 +1,7 @@
 export function TodoContainer({children}) {
   return (
     <>
-      <div class="todos-container">
+      <div className="todos-container">
         {children}
       </div>
     </>

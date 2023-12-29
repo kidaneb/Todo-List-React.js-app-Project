@@ -1,9 +1,9 @@
 export function TitleComponent() {
   return (
     <>
-      <button class="toggle-btn">dark</button>
-      <div class="title">
-        <h1 class="title-text">TODO-LIST APP</h1>
+      <button className="toggle-btn">dark</button>
+      <div className="title">
+        <h1 className="title-text">TODO-LIST APP</h1>
       </div>
     </>
   );

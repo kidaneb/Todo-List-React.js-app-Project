@@ -1,12 +1,12 @@
 export function TodoFilter(){
     return(
         <>
-        <div class="filter-input-container">
-          <input type="text" placeholder="search todos" class="filter-input" />
-          <div class="filter-child">
-            <span class="filter-error">error just happen todos not found</span>
+        <div className="filter-input-container">
+          <input type="text" placeholder="search todos" className="filter-input" />
+          <div className="filter-child">
+            <span className="filter-error">error just happen todos not found</span>
             
-              <div class="check-filter">
+              <div className="check-filter">
                 <label >completed</label>
                 <input type="checkbox" />
             </div>
