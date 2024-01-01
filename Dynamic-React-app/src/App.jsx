@@ -21,6 +21,17 @@ function App() {
       }
     }))
   }
+
+function deleteTodo(id){
+  setTodoArray(todoArray.filter((todo)=>{
+    if(todo.id !== id){
+      return todo;
+    }
+  
+  }))
+}
+
+
   function onSubmit(e) {
     e.preventDefault();
     if (todoRef.current.value === "") return;
@@ -59,7 +70,7 @@ function App() {
           <TodoFilter></TodoFilter>
           <TodoList>
             {todoArray.map((todo, index) => {
-              return <TodoItem key={index} {...todo} toggleTodo={toggleTodo} />;
+              return <TodoItem key={index} {...todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />;
             })}
           </TodoList>
         </TodoContainer>
