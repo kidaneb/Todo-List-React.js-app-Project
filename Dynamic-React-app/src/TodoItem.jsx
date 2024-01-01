@@ -3,9 +3,9 @@ export function TodoItem({ todo, id, complete, toggleTodo, deleteTodo }) {
     <>
       <div className="todo">
         <div className="text-container">
-          <span className={`text ${complete ? "line-through" : ""}`}>{todo}</span>
-          
-
+          <span className={`text ${complete ? "line-through" : ""}`}>
+            {todo}
+          </span>
         </div>
 
         <div className="btn-container">
@@ -13,7 +13,9 @@ export function TodoItem({ todo, id, complete, toggleTodo, deleteTodo }) {
             Complete
           </button>
           <button className="btn btn-edit">Edit</button>
-          <button className="btn btn-delete" onClick={()=>deleteTodo(id)}>Delete</button>
+          <button className="btn btn-delete" onClick={() => deleteTodo(id)}>
+            Delete
+          </button>
         </div>
       </div>
     </>
