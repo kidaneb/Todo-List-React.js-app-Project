@@ -12,8 +12,12 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editTodoId, setEditTodoId] = useState(null);
   const [editInput, setEditInput] = useState("");
-
   const todoRef = useRef();
+  const [filterText, setFilterText] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [hideComplete, setHideComplete] = useState(false)
+
+console.log(hideComplete)
 
   useEffect(() => {
     const storedTodo = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
@@ -67,6 +71,26 @@ function App() {
     }
   }
 
+  
+  let filteredArray = todoArray.filter((todo) => {
+    
+    return todo.todo.includes(filterText);
+  });
+
+  if(hideComplete){
+    filteredArray = filteredArray.filter((todo)=>{
+      return todo.complete ===false;
+    })
+  }
+
+  const Error = filteredArray.length === 0;
+  useEffect(() => {
+    setIsError(Error);
+  }, [Error]);
+
+
+  // Now you can use filteredArray or continue with the rest of your code...
+
   function onSubmit(e) {
     e.preventDefault();
     if (todoRef.current.value === "") return;
@@ -109,9 +133,15 @@ function App() {
           </div>
 
           <TodoContainer>
-            <TodoFilter></TodoFilter>
+            <TodoFilter
+              filterText={filterText}
+              setFilterText={setFilterText}
+              isError={isError}
+              hideComplete={hideComplete}
+              setHideComplete={setHideComplete}
+            ></TodoFilter>
             <TodoList>
-              {todoArray.map((todo, index) => {
+              {filteredArray.map((todo, index) => {
                 return (
                   <TodoItem
                     key={index}
@@ -126,6 +156,7 @@ function App() {
           </TodoContainer>
         </div>
       </div>
+
       {isEditing ? (
         <div className="edit-box">
           <button className="close1" onClick={() => setIsEditing(false)}>
