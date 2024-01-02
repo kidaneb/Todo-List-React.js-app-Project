@@ -1,4 +1,4 @@
-export function TodoItem({ todo, id, complete, toggleTodo, deleteTodo }) {
+export function TodoItem({ todo, id, complete, toggleTodo, deleteTodo, editTodo }) {
   return (
     <>
       <div className="todo">
@@ -12,7 +12,7 @@ export function TodoItem({ todo, id, complete, toggleTodo, deleteTodo }) {
           <button className="btn btn-complete" onClick={() => toggleTodo(id)}>
             Complete
           </button>
-          <button className="btn btn-edit">Edit</button>
+          <button className="btn btn-edit" onClick={()=>editTodo(id)}>Edit</button>
           <button className="btn btn-delete" onClick={() => deleteTodo(id)}>
             Delete
           </button>
