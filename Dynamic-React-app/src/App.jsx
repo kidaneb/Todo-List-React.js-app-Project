@@ -138,8 +138,9 @@ function App() {
     <>
       <div
         className={isDarkMode ? `body-dark` : `body`}
-        style={isEditing ? editStyle : {}}
+        style={{ ...(isEditing ? editStyle : {}), position: "relative" }}
       >
+        {isEditing ? <div className="overlay"></div> : null}
         <div className="container">
           <TitleComponent
             isDarkMode={isDarkMode}
