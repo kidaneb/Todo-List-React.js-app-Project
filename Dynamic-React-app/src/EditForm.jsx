@@ -1,14 +1,14 @@
-export function EditForm({setIsEditing,editInput,setEditInput,enterKey,updateTodo}) {
+export function EditForm({setIsEditing,editInput,setEditInput,editTodoId,enterKey,updateTodo, isDarkMode}) {
   return (
     <>
-      <div className="edit-box">
+      <div className={isDarkMode?`edit-box-dark`:`edit-box`}>
         <button className="close1" onClick={() => setIsEditing(false)}>
           X
         </button>
 
         <input
           type="text"
-          className="edit-input"
+          className={isDarkMode?`edit-input-dark`:`edit-input`}
           value={editInput}
           onChange={(e) => setEditInput(e.target.value)}
           onKeyDown={enterKey}

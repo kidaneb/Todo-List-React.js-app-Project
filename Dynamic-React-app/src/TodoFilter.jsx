@@ -6,6 +6,7 @@ export function TodoFilter({
   isError,
   hideComplete,
   setHideComplete,
+  isDarkMode
 }) {
   return (
     <>
@@ -13,7 +14,7 @@ export function TodoFilter({
         <input
           type="text"
           placeholder="search todos"
-          className="filter-input"
+          className={isDarkMode?`filter-input-dark`:`filter-input`}
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
         />
@@ -24,7 +25,7 @@ export function TodoFilter({
             </span>
           ) : null}
 
-          <div className="check-filter">
+          <div className={isDarkMode?`check-filter-dark`:`check-filter`}>
             <label>Hide completed</label>
             <input
               type="checkbox"

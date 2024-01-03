@@ -8,6 +8,7 @@ import { EditForm } from "./EditForm";
 import { TodoInputForm } from "./TodoInputForm";
 
 const LOCAL_STORAGE_KEY = "TODOS";
+const DARK_MODE_KEY = "MODE";
 
 function App() {
   const [todoArray, setTodoArray] = useState([]);
@@ -18,6 +19,19 @@ function App() {
   const [filterText, setFilterText] = useState("");
   const [isError, setIsError] = useState(false);
   const [hideComplete, setHideComplete] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const storedMode = JSON.parse(localStorage.getItem(DARK_MODE_KEY));
+
+    setIsDarkMode((currentMode) => {
+      if (storedMode != null) {
+        return storedMode;
+      } else {
+        return false;
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const storedTodo = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
@@ -44,10 +58,17 @@ function App() {
   if (todoArray.length !== 0) {
     Error = filteredArray.length === 0;
   }
-  
+
   useEffect(() => {
     setIsError(Error);
   }, [Error]);
+
+  function toggleDarkMode() {
+    setIsDarkMode((prevMode) => {
+      localStorage.setItem(DARK_MODE_KEY, JSON.stringify(!prevMode));
+      return !prevMode;
+    });
+  }
 
   function toggleTodo(id) {
     setTodoArray((previousArray) =>
@@ -94,8 +115,6 @@ function App() {
     }
   }
 
- 
-
   function onSubmit(e) {
     e.preventDefault();
     if (todoRef.current.value === "") return;
@@ -117,13 +136,20 @@ function App() {
 
   return (
     <>
-      <div className="body" style={isEditing ? editStyle : {}}>
+      <div
+        className={isDarkMode ? `body-dark` : `body`}
+        style={isEditing ? editStyle : {}}
+      >
         <div className="container">
-          <TitleComponent></TitleComponent>
+          <TitleComponent
+            isDarkMode={isDarkMode}
+            toggleDarkMode={toggleDarkMode}
+          ></TitleComponent>
 
-          <TodoInputForm 
-            todoRef={todoRef} 
+          <TodoInputForm
+            todoRef={todoRef}
             onSubmit={onSubmit}
+            isDarkMode={isDarkMode}
           ></TodoInputForm>
 
           <TodoContainer>
@@ -133,9 +159,10 @@ function App() {
               isError={isError}
               hideComplete={hideComplete}
               setHideComplete={setHideComplete}
+              isDarkMode={isDarkMode}
             ></TodoFilter>
 
-            <TodoList>
+            <TodoList isDarkMode={isDarkMode}>
               {filteredArray.map((todo, index) => {
                 return (
                   <TodoItem
@@ -144,11 +171,11 @@ function App() {
                     toggleTodo={toggleTodo}
                     deleteTodo={deleteTodo}
                     editTodo={editTodo}
+                    isDarkMode={isDarkMode}
                   />
                 );
               })}
             </TodoList>
-
           </TodoContainer>
         </div>
       </div>
@@ -158,8 +185,10 @@ function App() {
           setIsEditing={setIsEditing}
           editInput={editInput}
           setEditInput={setEditInput}
+          editTodoId={editTodoId}
           enterKey={enterKey}
           updateTodo={updateTodo}
+          isDarkMode={isDarkMode}
         ></EditForm>
       ) : undefined}
     </>

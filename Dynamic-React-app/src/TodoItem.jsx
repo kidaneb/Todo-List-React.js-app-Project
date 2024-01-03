@@ -1,8 +1,8 @@
-export function TodoItem({ todo, id, complete, toggleTodo, deleteTodo, editTodo }) {
+export function TodoItem({ todo, id, complete, toggleTodo, deleteTodo, editTodo, isDarkMode }) {
   return (
     <>
-      <div className="todo">
-        <div className="text-container">
+      <div className={isDarkMode?`todo-dark`:`todo`}>
+        <div className={isDarkMode?`text-container-dark`:`text-container`}>
           <span className={`text ${complete ? "line-through" : ""}`}>
             {todo}
           </span>

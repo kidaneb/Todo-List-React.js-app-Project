@@ -1,7 +1,11 @@
 * {
   box-sizing: border-box;
 }
+body{
+  margin: 0;
+}
 .body {
+ 
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -9,6 +13,7 @@
   z-index: 10;
 }
 .body-dark {
+ 
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -24,6 +29,7 @@
   flex-direction: column;
   align-items: center;
 }
+
 .container:hover {
   box-shadow: 0 0 5px 0 lightgray;
 }
@@ -219,7 +225,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  
 }
 .check-filter {
   margin-left: auto;
@@ -412,7 +417,7 @@
     width: 70%;
   }
 }
-.line-through{
+.line-through {
   text-decoration-line: line-through;
 }
 
@@ -422,7 +427,22 @@
   z-index: 5;
   height: 30vh;
   width: 30vw;
-  background-color:hsl(0, 12%, 90%);
+  background-color: hsl(0, 12%, 90%);
+  border: 1px solid hsl(0, 12%, 70%);
+  border-radius: 0.5em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.edit-box-dark {
+  z-index: 5;
+  height: 30vh;
+  width: 30vw;
+  background-color: hsl(0, 3%, 21%);
   border: 1px solid hsl(0, 12%, 70%);
   border-radius: 0.5em;
   position: absolute;
@@ -439,12 +459,20 @@
   border-radius: 0.5em;
   border: none;
   font-size: 1.4rem;
-  
 }
-.edit-input:focus{
-border: none;  
-outline: none;
-
+.edit-input-dark {
+  height: 60%;
+  width: 100%;
+  border-radius: 0.5em;
+  border: none;
+  font-size: 1.4rem;
+  background-color: transparent;
+  border: 1px solid grey;
+  color: whitesmoke;
+}
+.edit-input:focus {
+  border: none;
+  outline: none;
 }
 .edit-btn-container {
   height: 20%;
@@ -462,11 +490,11 @@ outline: none;
   border: none;
   font-size: 1rem;
   border-radius: 25%;
-  background-color:hsl(0, 100%, 70%);
-  color:white;
+  background-color: hsl(0, 100%, 70%);
+  color: white;
 }
-.close1:hover{
-  background-color:hsl(0, 100%, 50%);
+.close1:hover {
+  background-color: hsl(0, 100%, 50%);
 }
 .save {
   display: flex;
@@ -477,12 +505,12 @@ outline: none;
   font-size: 1rem;
   border: none;
   border-radius: 0.3em;
-  background-color:   hsl(211, 50%, 45%);
-  
-  color: white ;
+  background-color: hsl(211, 50%, 45%);
+
+  color: white;
 }
-.save:hover{
-  background-color:   hsl(211, 50%, 35%);
+.save:hover {
+  background-color: hsl(211, 50%, 35%);
 }
 .close2 {
   display: flex;
@@ -496,19 +524,27 @@ outline: none;
   background-color: hsl(0, 100%, 70%);
   color: white;
 }
-.close2:hover{
-  background-color:hsl(0, 100%, 50%);
+.close2:hover {
+  background-color: hsl(0, 100%, 50%);
 }
 
 @media (max-width: 768px) {
-  .edit-box {    
+  .edit-box {
     height: 30vh;
-    width: 70vw;        
+    width: 70vw;
+  }
+  .edit-box-dark {
+    height: 30vh;
+    width: 70vw;
   }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
-  .edit-box {    
+  .edit-box {
     height: 30vh;
-    width: 70vw;        
+    width: 70vw;
+  }
+  .edit-box-dark {
+    height: 30vh;
+    width: 70vw;
   }
 }

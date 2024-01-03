@@ -1,6 +1,6 @@
 
 
-export function TodoInputForm({todoRef,onSubmit}) {
+export function TodoInputForm({todoRef,onSubmit, isDarkMode}) {
   
   return (
     <>
@@ -9,7 +9,7 @@ export function TodoInputForm({todoRef,onSubmit}) {
           <input
             type="text"
             placeholder="Enter new todo"
-            className="todo-input"
+            className={isDarkMode?`todo-input-dark`:`todo-input`}
             ref={todoRef}
           />
           <div>
