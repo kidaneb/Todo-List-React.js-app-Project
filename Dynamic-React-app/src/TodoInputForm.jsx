@@ -1,7 +1,7 @@
-import { useRef } from "react";
 
-export function TodoInputForm({ onSubmit}) {
-  const todoRef = useRef();
+
+export function TodoInputForm({todoRef,onSubmit}) {
+  
   return (
     <>
       <div className="input-forms">
@@ -13,7 +13,7 @@ export function TodoInputForm({ onSubmit}) {
             ref={todoRef}
           />
           <div>
-            <button type="button" className="todo-submit-btn">
+            <button type="submit" className="todo-submit-btn">
               Add Todo
             </button>
           </div>

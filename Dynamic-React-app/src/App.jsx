@@ -4,6 +4,8 @@ import { TodoList } from "./TodoList";
 import { TodoContainer } from "./TodoContainer";
 import { useEffect, useRef, useState } from "react";
 import { TodoItem } from "./TodoItem";
+import { EditForm } from "./EditForm";
+import { TodoInputForm } from "./TodoInputForm";
 
 const LOCAL_STORAGE_KEY = "TODOS";
 
@@ -15,9 +17,7 @@ function App() {
   const todoRef = useRef();
   const [filterText, setFilterText] = useState("");
   const [isError, setIsError] = useState(false);
-  const [hideComplete, setHideComplete] = useState(false)
-
-console.log(hideComplete)
+  const [hideComplete, setHideComplete] = useState(false);
 
   useEffect(() => {
     const storedTodo = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
@@ -25,10 +25,29 @@ console.log(hideComplete)
   }, []);
 
   useEffect(() => {
-    if (todoArray.length > 0) {
+    if (todoArray.length > 0)
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todoArray));
-    }
   }, [todoArray]);
+
+  let filteredArray = todoArray.filter((todo) => {
+    return todo.todo.includes(filterText);
+  });
+
+  if (hideComplete) {
+    filteredArray = filteredArray.filter((todo) => {
+      return todo.complete === false;
+    });
+  }
+
+  let Error;
+
+  if (todoArray.length !== 0) {
+    Error = filteredArray.length === 0;
+  }
+  
+  useEffect(() => {
+    setIsError(Error);
+  }, [Error]);
 
   function toggleTodo(id) {
     setTodoArray((previousArray) =>
@@ -43,7 +62,11 @@ console.log(hideComplete)
   }
 
   function deleteTodo(id) {
-    setTodoArray((todoArray) => todoArray.filter((todo) => todo.id !== id));
+    setTodoArray((prevTodoArray) => {
+      const updateArray = prevTodoArray.filter((todo) => todo.id !== id);
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updateArray));
+      return updateArray;
+    });
   }
 
   function editTodo(id) {
@@ -71,25 +94,7 @@ console.log(hideComplete)
     }
   }
 
-  
-  let filteredArray = todoArray.filter((todo) => {
-    
-    return todo.todo.includes(filterText);
-  });
-
-  if(hideComplete){
-    filteredArray = filteredArray.filter((todo)=>{
-      return todo.complete ===false;
-    })
-  }
-
-  const Error = filteredArray.length === 0;
-  useEffect(() => {
-    setIsError(Error);
-  }, [Error]);
-
-
-  // Now you can use filteredArray or continue with the rest of your code...
+ 
 
   function onSubmit(e) {
     e.preventDefault();
@@ -115,22 +120,11 @@ console.log(hideComplete)
       <div className="body" style={isEditing ? editStyle : {}}>
         <div className="container">
           <TitleComponent></TitleComponent>
-          {JSON.stringify(todoArray)}
-          <div className="input-forms">
-            <form className="form" onSubmit={onSubmit}>
-              <input
-                type="text"
-                placeholder="Enter new todo"
-                className="todo-input"
-                ref={todoRef}
-              />
-              <div>
-                <button type="submit" className="todo-submit-btn">
-                  Add Todo
-                </button>
-              </div>
-            </form>
-          </div>
+
+          <TodoInputForm 
+            todoRef={todoRef} 
+            onSubmit={onSubmit}
+          ></TodoInputForm>
 
           <TodoContainer>
             <TodoFilter
@@ -140,6 +134,7 @@ console.log(hideComplete)
               hideComplete={hideComplete}
               setHideComplete={setHideComplete}
             ></TodoFilter>
+
             <TodoList>
               {filteredArray.map((todo, index) => {
                 return (
@@ -153,41 +148,19 @@ console.log(hideComplete)
                 );
               })}
             </TodoList>
+
           </TodoContainer>
         </div>
       </div>
 
       {isEditing ? (
-        <div className="edit-box">
-          <button className="close1" onClick={() => setIsEditing(false)}>
-            X
-          </button>
-
-          <input
-            type="text"
-            className="edit-input"
-            value={editInput}
-            onChange={(e) => setEditInput(e.target.value)}
-            onKeyDown={enterKey}
-            autoFocus
-          />
-          <div className="edit-btn-container">
-            <button
-              type="button"
-              className="save"
-              onClick={() => updateTodo(editTodoId)}
-            >
-              save
-            </button>
-            <button
-              type="button"
-              className="close2"
-              onClick={() => setIsEditing(false)}
-            >
-              close
-            </button>
-          </div>
-        </div>
+        <EditForm
+          setIsEditing={setIsEditing}
+          editInput={editInput}
+          setEditInput={setEditInput}
+          enterKey={enterKey}
+          updateTodo={updateTodo}
+        ></EditForm>
       ) : undefined}
     </>
   );
