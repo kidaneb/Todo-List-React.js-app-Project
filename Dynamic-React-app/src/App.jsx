@@ -2,13 +2,17 @@ import { TitleComponent } from "./TitleComponent";
 import { TodoFilter } from "./TodoFilter";
 import { TodoList } from "./TodoList";
 import { TodoContainer } from "./TodoContainer";
-import { useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { TodoItem } from "./TodoItem";
 import { EditForm } from "./EditForm";
 import { TodoInputForm } from "./TodoInputForm";
+import { AppContainer } from "./AppContainer";
+import { AppBody } from "./AppBody";
 
 const LOCAL_STORAGE_KEY = "TODOS";
 const DARK_MODE_KEY = "MODE";
+
+export const Contexts = createContext();
 
 function App() {
   const [todoArray, setTodoArray] = useState([]);
@@ -43,26 +47,28 @@ function App() {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todoArray));
   }, [todoArray]);
 
+  const todoToEdit = todoArray.find((todo) => todo.id === editTodoId);
+  useEffect(() => {
+    if (todoToEdit) {
+      setEditInput(todoToEdit.todo);
+    }
+  }, [todoToEdit]);
+
   let filteredArray = todoArray.filter((todo) => {
     return todo.todo.includes(filterText);
   });
-
   if (hideComplete) {
     filteredArray = filteredArray.filter((todo) => {
       return todo.complete === false;
     });
   }
-
   let Error;
-
   if (todoArray.length !== 0) {
     Error = filteredArray.length === 0;
   }
-
   useEffect(() => {
     setIsError(Error);
   }, [Error]);
-
   function toggleDarkMode() {
     setIsDarkMode((prevMode) => {
       localStorage.setItem(DARK_MODE_KEY, JSON.stringify(!prevMode));
@@ -125,74 +131,51 @@ function App() {
 
     todoRef.current.value = "";
   }
-  const editStyle = { opacity: 0.2, zIndex: 0 };
-  const todoToEdit = todoArray.find((todo) => todo.id === editTodoId);
-
-  useEffect(() => {
-    if (todoToEdit) {
-      setEditInput(todoToEdit.todo);
-    }
-  }, [todoToEdit]);
 
   return (
-    <>
-      <div
-        className={isDarkMode ? `body-dark` : `body`}
-        style={{ ...(isEditing ? editStyle : {}), position: "relative" }}
-      >
-        {isEditing ? <div className="overlay"></div> : null}
-        <div className="container">
-          <TitleComponent
-            isDarkMode={isDarkMode}
-            toggleDarkMode={toggleDarkMode}
-          ></TitleComponent>
+    <Contexts.Provider
+      value={{
+        isDarkMode,
+        toggleDarkMode,
+        todoRef,
+        onSubmit,
+        filterText,
+        setFilterText,
+        isError,
+        hideComplete,
+        setHideComplete,
+        toggleTodo,
+        deleteTodo,
+        editTodo,
+        setIsEditing,
+        editInput,
+        setEditInput,
+        editTodoId,
+        enterKey,
+        updateTodo,
+        isEditing
+      }}
+    >
+      <AppBody>
+        <AppContainer>
+          <TitleComponent></TitleComponent>
 
-          <TodoInputForm
-            todoRef={todoRef}
-            onSubmit={onSubmit}
-            isDarkMode={isDarkMode}
-          ></TodoInputForm>
+          <TodoInputForm></TodoInputForm>
 
           <TodoContainer>
-            <TodoFilter
-              filterText={filterText}
-              setFilterText={setFilterText}
-              isError={isError}
-              hideComplete={hideComplete}
-              setHideComplete={setHideComplete}
-              isDarkMode={isDarkMode}
-            ></TodoFilter>
+            <TodoFilter></TodoFilter>
 
-            <TodoList isDarkMode={isDarkMode}>
+            <TodoList>
               {filteredArray.map((todo, index) => {
-                return (
-                  <TodoItem
-                    key={index}
-                    {...todo}
-                    toggleTodo={toggleTodo}
-                    deleteTodo={deleteTodo}
-                    editTodo={editTodo}
-                    isDarkMode={isDarkMode}
-                  />
-                );
+                return <TodoItem key={index} {...todo} />;
               })}
             </TodoList>
           </TodoContainer>
-        </div>
-      </div>
+        </AppContainer>
+      </AppBody>
 
-      {isEditing ? (
-        <EditForm
-          setIsEditing={setIsEditing}
-          editInput={editInput}
-          setEditInput={setEditInput}
-          editTodoId={editTodoId}
-          enterKey={enterKey}
-          updateTodo={updateTodo}
-          isDarkMode={isDarkMode}
-        ></EditForm>
-      ) : undefined}
-    </>
+      {isEditing ? <EditForm></EditForm> : undefined}
+    </Contexts.Provider>
   );
 }
 export default App;

@@ -1,4 +1,8 @@
-export function TodoItem({ todo, id, complete, toggleTodo, deleteTodo, editTodo, isDarkMode }) {
+import { useContext } from "react";
+import { Contexts } from "./App";
+
+export function TodoItem({ todo, id, complete}) {
+  const {toggleTodo, deleteTodo, editTodo, isDarkMode} = useContext(Contexts);
   return (
     <>
       <div className={isDarkMode?`todo-dark`:`todo`}>

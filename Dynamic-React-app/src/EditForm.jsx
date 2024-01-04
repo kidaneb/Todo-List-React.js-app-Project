@@ -1,14 +1,25 @@
-export function EditForm({setIsEditing,editInput,setEditInput,editTodoId,enterKey,updateTodo, isDarkMode}) {
+import { useContext } from "react";
+import { Contexts } from "./App";
+export function EditForm() {
+  const {
+    setIsEditing,
+    editInput,
+    setEditInput,
+    editTodoId,
+    enterKey,
+    updateTodo,
+    isDarkMode,
+  } = useContext(Contexts);
   return (
     <>
-      <div className={isDarkMode?`edit-box-dark`:`edit-box`}>
+      <div className={isDarkMode ? `edit-box-dark` : `edit-box`}>
         <button className="close1" onClick={() => setIsEditing(false)}>
           X
         </button>
 
         <input
           type="text"
-          className={isDarkMode?`edit-input-dark`:`edit-input`}
+          className={isDarkMode ? `edit-input-dark` : `edit-input`}
           value={editInput}
           onChange={(e) => setEditInput(e.target.value)}
           onKeyDown={enterKey}

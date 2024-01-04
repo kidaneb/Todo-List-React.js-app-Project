@@ -1,20 +1,21 @@
-import { useState } from "react";
-
-export function TodoFilter({
-  filterText,
-  setFilterText,
-  isError,
-  hideComplete,
-  setHideComplete,
-  isDarkMode
-}) {
+import { useContext, useState } from "react";
+import { Contexts } from "./App";
+export function TodoFilter() {
+  const {
+    filterText,
+    setFilterText,
+    isError,
+    hideComplete,
+    setHideComplete,
+    isDarkMode,
+  } = useContext(Contexts);
   return (
     <>
       <div className="filter-input-container">
         <input
           type="text"
           placeholder="search todos"
-          className={isDarkMode?`filter-input-dark`:`filter-input`}
+          className={isDarkMode ? `filter-input-dark` : `filter-input`}
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
         />
@@ -25,7 +26,7 @@ export function TodoFilter({
             </span>
           ) : null}
 
-          <div className={isDarkMode?`check-filter-dark`:`check-filter`}>
+          <div className={isDarkMode ? `check-filter-dark` : `check-filter`}>
             <label>Hide completed</label>
             <input
               type="checkbox"

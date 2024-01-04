@@ -1,7 +1,9 @@
+import { useContext } from "react";
+import { Contexts } from "./App";
+export function TodoInputForm() {
 
+  const { todoRef, onSubmit, isDarkMode } = useContext(Contexts)
 
-export function TodoInputForm({todoRef,onSubmit, isDarkMode}) {
-  
   return (
     <>
       <div className="input-forms">
@@ -9,7 +11,7 @@ export function TodoInputForm({todoRef,onSubmit, isDarkMode}) {
           <input
             type="text"
             placeholder="Enter new todo"
-            className={isDarkMode?`todo-input-dark`:`todo-input`}
+            className={isDarkMode ? `todo-input-dark` : `todo-input`}
             ref={todoRef}
           />
           <div>
