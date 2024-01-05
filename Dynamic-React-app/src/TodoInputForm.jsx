@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { Contexts } from "./App";
-export function TodoInputForm() {
+import { ThemeContext } from "./App";
 
-  const { todoRef, onSubmit, isDarkMode } = useContext(Contexts)
-
+export function TodoInputForm({ todoRef, onSubmit}) {
+  
+    const {isDarkMode} = useContext(ThemeContext);
   return (
     <>
       <div className="input-forms">

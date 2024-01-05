@@ -1,13 +1,14 @@
 import { TodoItem } from "./TodoItem";
-import { Contexts } from "./App";
 import { useContext } from "react";
-export function TodoList({children}) {
-  const {isDarkMode} = useContext(Contexts);
+import { ThemeContext } from "./App";
+
+export function TodoList({ children}) {
+  const { isDarkMode } = useContext(ThemeContext);
   return (
     <>
-      <div className={isDarkMode?`todos-list-dark`:`todos-list`}>
-            {children}
-          </div>
+      <div className={isDarkMode ? `todos-list-dark` : `todos-list`}>
+        {children}
+      </div>
     </>
   );
 }

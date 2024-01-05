@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { Contexts } from "./App";
-export function AppBody({children}){
-    const editStyle = { opacity: 0.2, zIndex: 0 };
-    const {isEditing, isDarkMode} = useContext(Contexts);
+import { ThemeContext } from "./App";
+export function AppBody({children,isEditing}){
+  const editStyle = { opacity: 0.2, zIndex: 0 };
+    const {isDarkMode} = useContext(ThemeContext);
     return(
         <div
         className={isDarkMode ? `body-dark` : `body`}

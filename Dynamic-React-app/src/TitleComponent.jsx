@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { Contexts } from "./App";
+import { useContext, useEffect } from "react";
+import { ThemeContext } from "./App";
 
-export function TitleComponent() {
-  const { isDarkMode, toggleDarkMode } = useContext(Contexts);
+export function TitleComponent({ toggleDarkMode }) {
+  const { isDarkMode } = useContext(ThemeContext);
 
   return (
     <>

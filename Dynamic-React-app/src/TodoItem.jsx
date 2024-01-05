@@ -1,8 +1,9 @@
 import { useContext } from "react";
-import { Contexts } from "./App";
+import { ThemeContext } from "./App";
 
-export function TodoItem({ todo, id, complete}) {
-  const {toggleTodo, deleteTodo, editTodo, isDarkMode} = useContext(Contexts);
+
+export function TodoItem({ todo, id, complete,toggleTodo, deleteTodo, editTodo,}) {
+    const {isDarkMode} = useContext(ThemeContext);
   return (
     <>
       <div className={isDarkMode?`todo-dark`:`todo`}>

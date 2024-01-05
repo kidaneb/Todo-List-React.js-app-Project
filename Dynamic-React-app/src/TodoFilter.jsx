@@ -1,14 +1,10 @@
-import { useContext, useState } from "react";
-import { Contexts } from "./App";
+import { useContext, useEffect, useState } from "react";
+import { FilterContext } from "./App";
+import { ThemeContext } from "./App";
 export function TodoFilter() {
-  const {
-    filterText,
-    setFilterText,
-    isError,
-    hideComplete,
-    setHideComplete,
-    isDarkMode,
-  } = useContext(Contexts);
+  const { isDarkMode } = useContext(ThemeContext);
+  const { filterText, setFilterText, isError, hideComplete, setHideComplete } =
+    useContext(FilterContext);
   return (
     <>
       <div className="filter-input-container">

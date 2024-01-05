@@ -1,6 +1,8 @@
 import { useContext } from "react";
-import { Contexts } from "./App";
+import { EditContext } from "./App";
+import { ThemeContext } from "./App";
 export function EditForm() {
+    const {isDarkMode} = useContext(ThemeContext);
   const {
     setIsEditing,
     editInput,
@@ -8,8 +10,7 @@ export function EditForm() {
     editTodoId,
     enterKey,
     updateTodo,
-    isDarkMode,
-  } = useContext(Contexts);
+  } = useContext(EditContext);
   return (
     <>
       <div className={isDarkMode ? `edit-box-dark` : `edit-box`}>

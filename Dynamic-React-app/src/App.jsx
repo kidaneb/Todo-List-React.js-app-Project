@@ -12,7 +12,9 @@ import { AppBody } from "./AppBody";
 const LOCAL_STORAGE_KEY = "TODOS";
 const DARK_MODE_KEY = "MODE";
 
-export const Contexts = createContext();
+export const EditContext = createContext();
+export const FilterContext = createContext();
+export const ThemeContext = createContext();
 
 function App() {
   const [todoArray, setTodoArray] = useState([]);
@@ -133,49 +135,56 @@ function App() {
   }
 
   return (
-    <Contexts.Provider
-      value={{
-        isDarkMode,
-        toggleDarkMode,
-        todoRef,
-        onSubmit,
-        filterText,
-        setFilterText,
-        isError,
-        hideComplete,
-        setHideComplete,
-        toggleTodo,
-        deleteTodo,
-        editTodo,
-        setIsEditing,
-        editInput,
-        setEditInput,
-        editTodoId,
-        enterKey,
-        updateTodo,
-        isEditing
-      }}
-    >
-      <AppBody>
+    <ThemeContext.Provider value={{ isDarkMode }}>
+      <AppBody isEditing={isEditing}>
         <AppContainer>
-          <TitleComponent></TitleComponent>
+          <TitleComponent toggleDarkMode={toggleDarkMode}></TitleComponent>
 
-          <TodoInputForm></TodoInputForm>
+          <TodoInputForm todoRef={todoRef} onSubmit={onSubmit}></TodoInputForm>
 
           <TodoContainer>
-            <TodoFilter></TodoFilter>
+            <FilterContext.Provider
+              value={{
+                filterText,
+                setFilterText,
+                isError,
+                hideComplete,
+                setHideComplete,
+              }}
+            >
+              <TodoFilter></TodoFilter>
+            </FilterContext.Provider>
 
             <TodoList>
               {filteredArray.map((todo, index) => {
-                return <TodoItem key={index} {...todo} />;
+                return (
+                  <TodoItem
+                    key={index}
+                    {...todo}
+                    toggleTodo={toggleTodo}
+                    deleteTodo={deleteTodo}
+                    editTodo={editTodo}
+                  />
+                );
               })}
             </TodoList>
           </TodoContainer>
         </AppContainer>
       </AppBody>
 
-      {isEditing ? <EditForm></EditForm> : undefined}
-    </Contexts.Provider>
+      <EditContext.Provider
+        value={{
+          setIsEditing,
+          editInput,
+          setEditInput,
+          editTodoId,
+          enterKey,
+          updateTodo,
+        }}
+      >
+        {isEditing ? <EditForm></EditForm> : undefined}
+      </EditContext.Provider>
+    </ThemeContext.Provider>
   );
 }
 export default App;
